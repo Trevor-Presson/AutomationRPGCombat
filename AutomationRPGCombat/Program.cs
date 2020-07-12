@@ -8,9 +8,9 @@ namespace AutomationRPGCombat
         {
             Console.WriteLine("Hello World!");
             //Instance 
-            var characterGood = new Character { Name = "GoodJeff" };
+            var characterGood = new Character { Name = "GoodJeff", Level = 1 };
 
-            var characterBad = new Character { Name = "EvilJeff" };
+            var characterBad = new Character { Name = "EvilJeff", Level = 7 };
 
 
             var x = new Combat();

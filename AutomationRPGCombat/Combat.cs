@@ -6,6 +6,27 @@ namespace AutomationRPGCombat
 {
     public class Combat
     {
+        public double CombatRange { get; set; }
+
+        public Combat()
+        {
+            CombatRange = 100;
+        }
+
+        public bool RangeCheck (Character attackingCharacter, Combat combat )
+        {
+            if (attackingCharacter.Range >= combat.CombatRange)
+            {
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Insufficient distance... currently {0} feet away", combat.CombatRange);
+                combat.CombatRange -= 10;
+                return false;
+            }
+        }
+
         public void DealDamage(Character attackingCharacter, Character defendingCharacter)
         {
 

@@ -8,13 +8,22 @@ namespace AutomationRPGCombat
         {
             Console.WriteLine("Hello World!");
             //Instance 
-            var characterGood = new Ranger { Name = "GoodJeff", Level = 1 };
+            var characterGood = new Ranger { Name = "GoodJeff", Level = 1};
+            var characterGoodAlly = new Ranger { Name = "JeffFriend", Level = 2 };
 
-            var characterBad = new Warrior { Name = "EvilJeff", Level = 7 };
+            var characterBad = new Warrior { Name = "EvilJeff", Level = 7};
+
+            //Join Faction 
+            Faction factionGood = new Faction { Name = "GoodBoys" };
+            Faction factionBad = new Faction { Name = "BadBoys" };
+
+            characterGood.Factions.Add(factionGood);
+            characterGoodAlly.Factions.Add(factionGood);
+            characterBad.Factions.Add(factionBad);
 
             var combat = new Combat();
 
-            combat.Heal(characterGood, characterGood);
+            combat.Heal(characterGood, characterGoodAlly);
 
             while (characterGood.Alive == true)
             {

@@ -12,6 +12,7 @@ namespace AutomationRPGCombat
         public int Level { get; set; }
         public bool Alive { get; set; }
         public double Damage { get; set; }
+        public List<Faction> Factions { get; set; }
         public abstract double Range { get; }
 
         public Character()
@@ -20,7 +21,10 @@ namespace AutomationRPGCombat
             Level = 1;
             Alive = true;
             Damage = Level * 20;
+            Factions = new List<Faction>();
         }
+
+        //Join Faction(?)
            
     }
 

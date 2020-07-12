@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace AutomationRPGCombat
@@ -30,34 +31,42 @@ namespace AutomationRPGCombat
         public void DealDamage(Character attackingCharacter, Character defendingCharacter)
         {
 
-            //Logic to set Damage 
-            if ((attackingCharacter.Level - defendingCharacter.Level) >= 5)
+            //Logic - Cannot damage ally in faction 
+            if (attackingCharacter.Factions.Any(x => defendingCharacter.Factions.Any(y => y == x)))
             {
-                attackingCharacter.Damage += (attackingCharacter.Damage * .5);
-            }
-            else if ((attackingCharacter.Level - defendingCharacter.Level) >= 5)
-            {
-                attackingCharacter.Damage -= attackingCharacter.Damage - (attackingCharacter.Damage * .5);
+                Console.WriteLine("Cannot attack ally");
             }
 
-            //Logic - Prevent Damage dealt to self
-            if (attackingCharacter.Name != defendingCharacter.Name)
-            {
-                defendingCharacter.Health -= attackingCharacter.Damage;
-            }
-            
-            //Logic - Assign Death if Health drops to 0 or below 
-            if (defendingCharacter.Health <= 0)
-            {
-                defendingCharacter.Alive = false;
-                Console.WriteLine("Character dead");
+            else {
+                //Logic to set Damage 
+                if ((attackingCharacter.Level - defendingCharacter.Level) >= 5)
+                {
+                    attackingCharacter.Damage += (attackingCharacter.Damage * .5);
+                }
+                else if ((attackingCharacter.Level - defendingCharacter.Level) >= 5)
+                {
+                    attackingCharacter.Damage -= attackingCharacter.Damage - (attackingCharacter.Damage * .5);
+                }
+
+                //Logic - Prevent Damage dealt to self
+                if (attackingCharacter.Name != defendingCharacter.Name)
+                {
+                    defendingCharacter.Health -= attackingCharacter.Damage;
+                }
+
+                //Logic - Assign Death if Health drops to 0 or below 
+                if (defendingCharacter.Health <= 0)
+                {
+                    defendingCharacter.Alive = false;
+                    Console.WriteLine("Character dead");
+                }
             }
         }
 
         public void Heal(Character healingCharacter, Character targetCharacter)
         {
             //Logic - Restrict Healing to character that is alive and healing self
-            if (healingCharacter.Alive == true && healingCharacter.Name == targetCharacter.Name)
+            if (healingCharacter.Alive == true && healingCharacter.Factions.Any(x => targetCharacter.Factions.Any(y => y == x)))
             {
                 healingCharacter.Health += 250;
 

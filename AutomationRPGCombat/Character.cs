@@ -23,9 +23,6 @@ namespace AutomationRPGCombat
             Damage = Level * 20;
             Factions = new List<Faction>();
         }
-
-        //Join Faction(?)
-           
     }
 
     public class Ranger : Character

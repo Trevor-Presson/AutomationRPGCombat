@@ -63,6 +63,16 @@ namespace AutomationRPGCombat
             }
         }
 
+        public void DealDamage(Character attackingCharacter, Item item)
+        {
+            item.Health -= attackingCharacter.Damage;
+
+            if (item.Health <= 0)
+            {
+                Console.WriteLine("Item is destroyed");
+            }
+        }
+
         public void Heal(Character healingCharacter, Character targetCharacter)
         {
             //Logic - Restrict Healing to character that is alive and healing self
